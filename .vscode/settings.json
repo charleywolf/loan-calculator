@@ -1,0 +1,13 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "css.customData": [".vscode/tailwind.json"],
+  "editor.formatOnSave": true,
+  "jsdoc-generator.includeAsync": false,
+  "jsdoc-generator.includeDate": false,
+  "jsdoc-generator.includeExport": false,
+  "jsdoc-generator.includeTime": false,
+  "jsdoc-generator.descriptionPlaceholder": ""
+}
