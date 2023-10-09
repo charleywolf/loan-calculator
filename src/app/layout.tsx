@@ -1,13 +1,15 @@
 import "./globals.css";
 
+import { ErrorProvider } from "@/contexts/useErrors";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Loan Calculator",
-  description: "Amortization schedules, interest calculations, and more/",
+  description: "See your loan details and monthly payments.",
 };
 
 export default function RootLayout({
@@ -16,8 +18,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ErrorProvider>
+      <html lang="en">
+        <body className={inter.className}>
+          <div className="min-h-screen">
+            <Navbar />
+            {children}
+          </div>
+        </body>
+      </html>
+    </ErrorProvider>
   );
 }
