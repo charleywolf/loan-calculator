@@ -105,9 +105,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-row justify-start p-12">
+    <main className="flex md:flex-row flex-col justify-start p-12">
       <ErrorDisplay />
-      <div className="flex flex-col md:w-1/3 mr-10">
+      <div className="flex items-center md:items-start flex-col md:w-1/3 md:mr-10">
         <LoanInputDate
           title="First Payment Date"
           id="firstPaymentDate"
@@ -159,7 +159,7 @@ export default function Home() {
         totalPeriods &&
         startingBalance !== "" &&
         annualInterestRate !== "" && (
-          <div className="flex flex-col md:w-2/3">
+          <div className="flex flex-col w-full md:w-2/3">
             <Amortization
               periodsPerYear={periodsPerYear}
               startingBalance={parseFloat(

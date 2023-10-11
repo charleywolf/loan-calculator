@@ -34,7 +34,9 @@ export default function LoaninputMoney({
         />
       </div>
 
-      {infoText && <p className="text-sm text-gray-500 mt-1">{infoText}</p>}
+      {infoText && (
+        <p className="text-sm hidden md:block text-gray-500 mt-1">{infoText}</p>
+      )}
     </div>
   );
 }

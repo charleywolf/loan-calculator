@@ -70,8 +70,8 @@ export default function Amortization({
   return (
     <>
       <div className="mb-8 flex flex-col">
-        <div className="flex-row flex space-x-10 mb-8 justify-center">
-          <div className="flex flex-col items-center">
+        <div className="md:flex-row mt-5 md:mt-0 space-y-5 md:space-y-0 md:flex md:space-x-10 mb-8 text-center md:justify-center">
+          <div className="flex flex-col md:items-center">
             <div className="text-lg font-semibold text-blue-600">
               Total Interest Paid
             </div>
@@ -83,7 +83,7 @@ export default function Amortization({
             </div>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col md:items-center">
             <div className="text-lg font-semibold text-green-600">
               Total Cost of the Loan
             </div>
@@ -95,7 +95,7 @@ export default function Amortization({
             </div>
           </div>
 
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col md:items-center">
             <div className="text-lg font-semibold text-purple-600">
               Monthly Payment
             </div>
@@ -107,7 +107,6 @@ export default function Amortization({
             </div>
           </div>
         </div>
-        {/* <div > */}
         <a
           href="#amortization-schedule"
           className="flex flex-row space-x-3 justify-center"
@@ -116,67 +115,68 @@ export default function Amortization({
           <h1 className="text-xl font-bold">Amortization Schedule</h1>
           <ChevronDoubleDownIcon className="h-6 w-6" aria-hidden="true" />
         </a>
-        {/* </div> */}
       </div>
 
-      <table
-        id="amortization-schedule"
-        className="min-w-full divide-y divide-gray-200"
-      >
-        <thead className="bg-gray-100">
-          <tr>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Payment Date
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Payment
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Principal
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Interest
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Total Interest
-            </th>
-            <th
-              scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Balance
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-gray-50 divide-y divide-gray-200">
-          {rows.map((row) => (
-            <Row
-              key={row.balance}
-              interest={row.interest}
-              paymentDate={row.paymentDate}
-              payment={row.payment}
-              balance={row.balance}
-              principal={row.principal}
-              totalInterest={row.totalInterest}
-            />
-          ))}
-        </tbody>
-      </table>
+      <div className="overflow-x-auto">
+        <table
+          id="amortization-schedule"
+          className="min-w-full divide-y divide-gray-200"
+        >
+          <thead className="bg-gray-100">
+            <tr>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Payment Date
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Payment
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Principal
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Interest
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Total Interest
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Balance
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-gray-50 divide-y divide-gray-200">
+            {rows.map((row) => (
+              <Row
+                key={row.balance}
+                interest={row.interest}
+                paymentDate={row.paymentDate}
+                payment={row.payment}
+                balance={row.balance}
+                principal={row.principal}
+                totalInterest={row.totalInterest}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 }

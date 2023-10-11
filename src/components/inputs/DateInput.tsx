@@ -30,7 +30,9 @@ export default function LoanInputDate({
         onChange={onChange}
         className="border rounded-md py-2 px-3 w-full outline-none"
       />
-      {infoText && <p className="text-sm text-gray-500 mt-1">{infoText}</p>}
+      {infoText && (
+        <p className="text-sm hidden md:block text-gray-500 mt-1">{infoText}</p>
+      )}
     </div>
   );
 }
