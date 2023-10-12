@@ -74,7 +74,10 @@ export default function Home() {
         ...errors,
         {
           title: "Invalid Input",
-          description: "Periods per year cannot exceed 24.",
+          description:
+            max === 24
+              ? "Periods per year cannot exceed 24."
+              : "Total periods cannot exceed 30 years.",
         },
       ]);
     }
@@ -121,7 +124,7 @@ export default function Home() {
           placeholder="60"
           value={totalPeriods === undefined ? "" : totalPeriods.toString()}
           onChange={(e) =>
-            positiveIntegerOnlyChange(setTotalPeriods, e.target.value)
+            positiveIntegerOnlyChange(setTotalPeriods, e.target.value, 360)
           }
           infoText="Enter the total number of payment periods."
         />
