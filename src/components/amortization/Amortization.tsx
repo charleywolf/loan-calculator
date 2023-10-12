@@ -1,5 +1,10 @@
 import Row, { RowProps } from "./Row";
-import { addMonthsToDate, calculatePMT, handleScroll } from "@/utils/helper";
+import {
+  addMonthsToDate,
+  calculatePMT,
+  formatDate,
+  handleScroll,
+} from "@/utils/helper";
 
 import { ChevronDoubleDownIcon } from "@heroicons/react/24/outline";
 
@@ -64,6 +69,7 @@ export default function Amortization({
     });
   }
 
+  const estimatedPayoffDate = rows[rows.length - 1].paymentDate;
   const totalInterestPaid = rows[rows.length - 1].totalInterest;
   const totalCost = startingBalance + totalInterestPaid;
 
@@ -104,6 +110,15 @@ export default function Amortization({
                 style: "currency",
                 currency: "USD",
               })}
+            </div>
+          </div>
+
+          <div className="flex flex-col md:items-center">
+            <div className="text-lg font-semibold text-pink-600">
+              Estimated Payoff Date
+            </div>
+            <div className="text-2xl font-bold text-pink-800">
+              {formatDate(estimatedPayoffDate)}
             </div>
           </div>
         </div>
