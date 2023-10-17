@@ -56,11 +56,9 @@ export default function Amortization({
     interest = perPeriodInterestRate * balance; // interest is interest rate * prev balance
     totalInterest += interest; // total interest is prev total interest + interest
 
-    if (balance - (monthlyPayment - interest) >= 0) {
-      principal = monthlyPayment - interest; // principal is payment - interes
-    } else {
-      const lastPayment =
-        monthlyPayment + (balance - (monthlyPayment - interest));
+    principal = monthlyPayment - interest; // principal is payment - interes
+    if (balance - principal < 0) {
+      const lastPayment = monthlyPayment + balance - principal;
       principal = lastPayment - interest;
     }
 
