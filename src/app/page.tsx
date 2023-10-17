@@ -13,6 +13,8 @@ export default function Home() {
   // Define state variables and event handlers for each input field
   const [firstPaymentDate, setFirstPaymentDate] = useState<Date>(new Date());
   const [startingBalance, setStartingBalance] = useState<string>("");
+  const [additionalMonthlyPayment, setAdditionalMonthlyPayment] =
+    useState<string>("");
   const [annualInterestRate, setAnnualInterestRate] = useState<string>("");
   const [totalPeriods, setTotalPeriods] = useState<number | undefined>(
     undefined,
@@ -24,7 +26,12 @@ export default function Home() {
   // Errors
   const { setErrors, errors } = useErrors();
 
-  const dollarOnlyChange = (inputValue: string, max: number) => {
+  const dollarOnlyChange = (
+    inputValue: string,
+    setValue: React.Dispatch<SetStateAction<string>>,
+    max: number,
+    maxDesc: string,
+  ) => {
     // Remove commas and other non-numeric characters from the input
     const cleanedValue = inputValue.replace(/[^\d.]/g, "");
 
@@ -32,7 +39,7 @@ export default function Home() {
     const numericValue = parseFloat(cleanedValue);
 
     if (inputValue === "") {
-      setStartingBalance("");
+      setValue("");
     } else if (
       !isNaN(numericValue) &&
       numericValue > 0 &&
@@ -40,14 +47,13 @@ export default function Home() {
     ) {
       // Reformat the numericValue as a dollar value with commas
       const formattedValue = numericValue.toLocaleString("en-US");
-      setStartingBalance(formattedValue);
+      setValue(formattedValue);
     } else if (numericValue > max) {
       setErrors([
         ...errors,
         {
           title: "Invalid Input",
-          description:
-            "Starting balance of the loan cannot exceed 500 million.",
+          description: maxDesc,
         },
       ]);
     }
@@ -144,8 +150,30 @@ export default function Home() {
           title="Starting Balance"
           id="startingBalance"
           value={startingBalance}
-          onChange={(e) => dollarOnlyChange(e.target.value, 500000000)}
+          onChange={(e) =>
+            dollarOnlyChange(
+              e.target.value,
+              setStartingBalance,
+              500000000,
+              "Starting balance of the loan cannot exceed $500 million.",
+            )
+          }
           infoText="Enter the initial balance amount."
+        />
+        <LoanInputMoney
+          placeholder="1,000"
+          title="Additional Monthly Payment"
+          id="additionalMonthlyPayment"
+          value={additionalMonthlyPayment}
+          onChange={(e) =>
+            dollarOnlyChange(
+              e.target.value,
+              setAdditionalMonthlyPayment,
+              10000,
+              "An additional monthly payment cannot exceed $10,000.",
+            )
+          }
+          infoText="Enter an additional monthly payment amount."
         />
         <LoanInput
           title="Annual Interest Rate"
@@ -164,6 +192,9 @@ export default function Home() {
         annualInterestRate !== "" && (
           <div className="flex flex-col w-full md:w-2/3">
             <Amortization
+              additionalMonthlyPayment={parseFloat(
+                additionalMonthlyPayment.replace(/[^\d.]/g, ""),
+              )}
               periodsPerYear={periodsPerYear}
               startingBalance={parseFloat(
                 startingBalance.replace(/[^\d.]/g, ""),
