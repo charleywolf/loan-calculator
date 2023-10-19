@@ -12,7 +12,7 @@ export default function Amortization({
   firstPaymentDate,
   startingBalance,
   annualInterestRate,
-  totalPeriods,
+  totalYears,
   periodsPerYear,
   additionalMonthlyPayment,
 }: {
@@ -20,13 +20,16 @@ export default function Amortization({
   startingBalance: number;
   additionalMonthlyPayment: number;
   annualInterestRate: number;
-  totalPeriods: number;
+  totalYears: number;
   periodsPerYear: number;
 }) {
   const perPeriodInterestRate = annualInterestRate / periodsPerYear;
   const monthlyPayment =
-    calculatePMT(startingBalance, perPeriodInterestRate, totalPeriods) +
-    (isNaN(additionalMonthlyPayment) ? 0 : additionalMonthlyPayment);
+    calculatePMT(
+      startingBalance,
+      perPeriodInterestRate,
+      totalYears * periodsPerYear,
+    ) + (isNaN(additionalMonthlyPayment) ? 0 : additionalMonthlyPayment);
 
   let firstRowInterest = perPeriodInterestRate * startingBalance;
   let firstRow: RowProps = {

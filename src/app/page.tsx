@@ -16,9 +16,7 @@ export default function Home() {
   const [additionalMonthlyPayment, setAdditionalMonthlyPayment] =
     useState<string>("");
   const [annualInterestRate, setAnnualInterestRate] = useState<string>("");
-  const [totalPeriods, setTotalPeriods] = useState<number | undefined>(
-    undefined,
-  );
+  const [totalYears, setTotalYears] = useState<number | undefined>(undefined);
   const [periodsPerYear, setPeriodsPerYear] = useState<number | undefined>(
     undefined,
   );
@@ -83,7 +81,7 @@ export default function Home() {
           description:
             max === 24
               ? "Periods per year cannot exceed 24."
-              : "Total periods cannot exceed 30 years.",
+              : "Total years cannot exceed 30 years.",
         },
       ]);
     }
@@ -125,12 +123,12 @@ export default function Home() {
           infoText="Enter the date of the first payment."
         />
         <LoanInput
-          title="Total Number of Periods"
-          id="totalPeriods"
-          placeholder="60"
-          value={totalPeriods === undefined ? "" : totalPeriods.toString()}
+          title="Total Number of Years"
+          id="totalYears"
+          placeholder="5"
+          value={totalYears === undefined ? "" : totalYears.toString()}
           onChange={(e) =>
-            positiveIntegerOnlyChange(setTotalPeriods, e.target.value, 360)
+            positiveIntegerOnlyChange(setTotalYears, e.target.value, 30)
           }
           infoText="Enter the total number of payment periods."
         />
@@ -187,7 +185,7 @@ export default function Home() {
         />
       </div>
       {periodsPerYear &&
-        totalPeriods &&
+        totalYears &&
         startingBalance !== "" &&
         annualInterestRate !== "" && (
           <div className="flex flex-col w-full md:w-2/3">
@@ -200,7 +198,7 @@ export default function Home() {
                 startingBalance.replace(/[^\d.]/g, ""),
               )}
               annualInterestRate={parseFloat(annualInterestRate) / 100}
-              totalPeriods={totalPeriods}
+              totalYears={totalYears}
               firstPaymentDate={firstPaymentDate}
             />
           </div>
