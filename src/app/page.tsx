@@ -133,9 +133,9 @@ export default function Home() {
           infoText="Enter the total number of payment periods."
         />
         <LoanInput
-          title="Periods per Year"
+          title="Payment Periods per Year"
           id="periodsPerYear"
-          placeholder="12"
+          placeholder="3"
           value={periodsPerYear === undefined ? "" : periodsPerYear.toString()}
           onChange={(e) =>
             positiveIntegerOnlyChange(setPeriodsPerYear, e.target.value, 24)
