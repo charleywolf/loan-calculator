@@ -2,7 +2,7 @@
 
 Created with Next.js, this application can be used to view data about a loan, whether it be a mortgage or student loan.
 
-Visit it now on [Vercel](https://charleywolf-loan-calculator.vercel.app), a platform for web development.
+Visit it now on [Vercel](https://charleywolf-loan-calculator.vercel.app).
 
 ## Features
 
